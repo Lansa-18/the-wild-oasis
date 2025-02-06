@@ -2,15 +2,23 @@ import { lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import Account from "./pages/Account";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Bookings = lazy(() => import("./pages/Bookings"));
-const Cabins = lazy(() => import("./pages/Cabins"));
-const Login = lazy(() => import("./pages/Login"));
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
-const Settings = lazy(() => import("./pages/Settings"));
-const Users = lazy(() => import("./pages/Users"));
-const Account = lazy(() => import("./pages/Account"));
+// const Dashboard = lazy(() => import("./pages/Dashboard"));
+// const Bookings = lazy(() => import("./pages/Bookings"));
+// const Cabins = lazy(() => import("./pages/Cabins"));
+// const Login = lazy(() => import("./pages/Login"));
+// const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+// const Settings = lazy(() => import("./pages/Settings"));
+// const Users = lazy(() => import("./pages/Users"));
+// const Account = lazy(() => import("./pages/Account"));
 
 function App() {
   return (
