@@ -17,7 +17,7 @@ function Sidebar() {
     return (
         <StyledSidebar>
             <Logo />
-            {/* <MainNav /> */}
+            <MainNav />
         </StyledSidebar>
     )
 }
