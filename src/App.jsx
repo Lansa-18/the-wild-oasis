@@ -10,6 +10,8 @@ import Settings from "./pages/Settings";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // const Dashboard = lazy(() => import("./pages/Dashboard"));
 // const Bookings = lazy(() => import("./pages/Bookings"));
@@ -20,29 +22,38 @@ import PageNotFound from "./pages/PageNotFound";
 // const Users = lazy(() => import("./pages/Users"));
 // const Account = lazy(() => import("./pages/Account"));
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+    },
+  },
+});
+
 function App() {
   return (
-    <>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false}>
+      </ReactQueryDevtools>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Routes>
+            {/* This is called a layout route because it doesn't have the path prop in it. */}
+            <Route element={<AppLayout />}>
+              <Route index element={<Navigate replace to="dashboard" />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="bookings" element={<Bookings />} />
+              <Route path="cabins" element={<Cabins />} />
+              <Route path="users" element={<Users />} />
+              <Route path="setting" element={<Settings />} />
+              <Route path="account" element={<Account />} />
+            </Route>
 
-          {/* This is called a layout route because it doesn't have the path prop in it. */}
-          <Route element={<AppLayout />}> 
-            <Route index element={<Navigate replace to="dashboard" />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="bookings" element={<Bookings />} />
-            <Route path="cabins" element={<Cabins />} />
-            <Route path="users" element={<Users />} />
-            <Route path="setting" element={<Settings />} />
-            <Route path="account" element={<Account />} />
-          </Route>
-
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
