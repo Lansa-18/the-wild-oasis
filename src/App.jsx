@@ -39,6 +39,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
+          {/* This is called a layout route because it doesn't have the path prop in it. */}
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
