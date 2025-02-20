@@ -1,4 +1,3 @@
-import { cloneElement, useContext, createContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
@@ -52,54 +51,18 @@ const Button = styled.button`
   }
 `;
 
-// Implementing a compound component.
-
-// 1. Creating the context
-const ModalContext = createContext();
-
-// 2. Creating the parent component.
-function Modal({ children }) {
-  const [openName, setOpenName] = useState("");
-
-  const close = () => setOpenName("");
-  const open = (name) => setOpenName(name);
-
-  return (
-    <ModalContext.Provider value={{ openName, close, open }}>
-      {children}
-    </ModalContext.Provider>
-  );
-}
-
-// 3. Creating child components to help implement common tasks.
-function Open({ children, opens: opensWindowName }) {
-  const { open } = useContext(ModalContext);
-  console.log(opensWindowName);
-
-  return cloneElement(children, { onClick: () => open(opensWindowName) });
-}
-
-function Window({ children, name }) {
-  const { openName, close } = useContext(ModalContext);
-  console.log(name);
-
-  if (name !== openName) return null;
-
+function Modal({ children, onClose }) {
   return createPortal(
     <Overlay>
       <StyledModal>
-        <Button onClick={close}>
+        <Button onClick={onClose}>
           <HiXMark />
         </Button>
-        <div>{cloneElement(children, {onCloseModal: () => close()})}</div>
+        <div>{children}</div>
       </StyledModal>
     </Overlay>,
     document.body
   );
 }
-
-// 4. Adding child components as properties to parent component.
-Modal.Open = Open;
-Modal.Window = Window;
 
 export default Modal;
