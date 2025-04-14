@@ -15,6 +15,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import CheckIn from "./pages/CheckIn";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 // const Dashboard = lazy(() => import("./pages/Dashboard"));
 // const Bookings = lazy(() => import("./pages/Bookings"));
@@ -42,7 +43,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* This is called a layout route because it doesn't have the path prop in it. */}
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="bookings" element={<Bookings />} />
