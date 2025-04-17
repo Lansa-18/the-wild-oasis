@@ -18,15 +18,6 @@ import CheckIn from "./pages/CheckIn";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 
-// const Dashboard = lazy(() => import("./pages/Dashboard"));
-// const Bookings = lazy(() => import("./pages/Bookings"));
-// const Cabins = lazy(() => import("./pages/Cabins"));
-// const Login = lazy(() => import("./pages/Login"));
-// const PageNotFound = lazy(() => import("./pages/PageNotFound"));
-// const Settings = lazy(() => import("./pages/Settings"));
-// const Users = lazy(() => import("./pages/Users"));
-// const Account = lazy(() => import("./pages/Account"));
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
